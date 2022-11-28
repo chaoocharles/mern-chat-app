@@ -1,6 +1,8 @@
 import Chat from "./components/Chat";
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function App() {
   return (
     <Routes>
