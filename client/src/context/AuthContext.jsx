@@ -7,6 +7,8 @@ export const AuthContextProvider = ({ children }) => {
 
   console.log("Auth State", user);
 
+  // use usecallback
+
   const registerUser = () => {};
 
   const loginUser = () => {};
