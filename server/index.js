@@ -4,6 +4,7 @@ const express = require("express");
 
 const chatRoute = require("./Routes/chatRoute");
 const messageRoute = require("./Routes/messageRoute");
+const userRoute = require("./Routes/userRoute");
 
 require("dotenv").config();
 
@@ -12,11 +13,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use("/api/users", userRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
 app.get("/", (req, res) => {
-  res.send("Welcome our chat API...");
+  res.send("Welcome to our chat API...");
 });
 
 const uri = process.env.ATLAS_URI;
