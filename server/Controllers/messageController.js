@@ -28,5 +28,4 @@ const getMessages = async (req, res) => {
   }
 };
 
-exports.createMessage = createMessage;
-exports.getMessages = getMessages;
+module.exports = { createMessage, getMessages };

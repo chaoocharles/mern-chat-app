@@ -40,3 +40,5 @@ const findChat = async (req, res) => {
 exports.createChat = createChat;
 exports.userChats = userChats;
 exports.findChat = findChat;
+
+module.exports = { createChat, userChats, findChat };
