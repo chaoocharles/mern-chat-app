@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from "react";
+import { baseUrl, postRequest } from "../utils/service";
 
 export const AuthContext = createContext();
 
@@ -9,19 +10,48 @@ export const AuthContextProvider = ({ children }) => {
     email: "",
     password: "",
   });
-
-  console.log("Auth State", user);
-  console.log("Register State", registerInfo);
+  const [loginInfo, setLoginInfo] = useState({
+    email: "",
+    password: "",
+  });
 
   const updateRegisterInfo = useCallback((info) => {
     setRegisterInfo(info);
   }, []);
 
-  const registerUser = () => {};
+  const updateLoginInfo = useCallback((info) => {
+    setLoginInfo(info);
+  }, []);
 
-  const loginUser = () => {};
+  const registerUser = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-  const logoutUser = () => {};
+      const response = await postRequest(
+        `${baseUrl}/users/register`,
+        JSON.stringify(registerInfo)
+      );
+
+      console.log("Register response:", response);
+    },
+    [registerInfo]
+  );
+
+  const loginUser = useCallback(
+    async (e) => {
+      e.preventDefault();
+
+      const response = await postRequest(
+        `${baseUrl}/users/login`,
+        JSON.stringify(loginInfo)
+      );
+
+      console.log("Login response:", response);
+    },
+    [loginInfo]
+  );
+
+  const logoutUser = useCallback(() => {}, []);
 
   return (
     <AuthContext.Provider
@@ -32,6 +62,8 @@ export const AuthContextProvider = ({ children }) => {
         logoutUser,
         registerInfo,
         updateRegisterInfo,
+        loginInfo,
+        updateLoginInfo,
       }}
     >
       {children}

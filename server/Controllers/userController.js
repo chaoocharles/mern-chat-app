@@ -4,9 +4,10 @@ const validator = require("validator");
 const userModel = require("../Models/userModel");
 
 const createToken = (_id) => {
+  console.log("id", _id);
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
-  return jwt.sign({ _id }, jwtSecretKey, { expiresIn: "7d" });
+  return jwt.sign({ _id }, jwtSecretKey, { expiresIn: "3d" });
 };
 
 const registerUser = async (req, res) => {
@@ -34,8 +35,11 @@ const registerUser = async (req, res) => {
 
     const token = createToken(user._id);
 
+    console.log("token", token);
+
     res.status(200).json({ email, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
@@ -45,16 +49,18 @@ const loginUser = async (req, res) => {
 
   try {
     let user = await userModel.findOne({ email });
-    if (!user) return res.status(400).send("Invalid email or password...");
+
+    if (!user) return res.status(400).json("Invalid email or password...");
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword)
-      return res.status(400).send("Invalid email or password...");
+      return res.status(400).json("Invalid email or password...");
 
     const token = createToken(user._id);
 
     res.status(200).json({ email, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };
