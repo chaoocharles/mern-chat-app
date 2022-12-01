@@ -15,7 +15,15 @@ export const postRequest = async (url, body) => {
   const data = await response.json();
 
   if (!response.ok) {
-    return { Error: true, Status: response.status, data };
+    let message;
+
+    if (data?.message) {
+      message = data.message;
+    } else {
+      message = data;
+    }
+
+    return { error: true, status: response.status, message };
   }
 
   return data;

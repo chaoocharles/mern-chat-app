@@ -4,7 +4,6 @@ const validator = require("validator");
 const userModel = require("../Models/userModel");
 
 const createToken = (_id) => {
-  console.log("id", _id);
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
   return jwt.sign({ _id }, jwtSecretKey, { expiresIn: "3d" });
@@ -25,7 +24,7 @@ const registerUser = async (req, res) => {
     if (!validator.isEmail(email))
       return res.status(400).json("Email must be a valid email...");
 
-    if (!validator.isStrongPassword)
+    if (!validator.isStrongPassword(password))
       return res.status(400).json("Password must be a strong password..");
 
     const salt = await bcrypt.genSalt(10);
@@ -35,9 +34,7 @@ const registerUser = async (req, res) => {
 
     const token = createToken(user._id);
 
-    console.log("token", token);
-
-    res.status(200).json({ email, token });
+    res.status(200).json({ name, email, token });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -58,7 +55,7 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user._id);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ name: user.name, email, token });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
