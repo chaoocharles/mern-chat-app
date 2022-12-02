@@ -14,12 +14,12 @@ export const ChatContextProvider = ({ children, user }) => {
   useEffect(() => {
     const getUserChats = async () => {
       setIsUserChatsLoading(true);
+      setLoginError(null);
+
       if (user?._id) {
         const userId = user._id;
 
         const response = await getRequest(`${baseUrl}/chats/${userId}`);
-
-        setIsUserChatsLoading(false);
 
         if (response.error) {
           return setUserChatsError(response);
@@ -27,6 +27,8 @@ export const ChatContextProvider = ({ children, user }) => {
 
         setUserChats(response);
       }
+
+      setIsUserChatsLoading(false);
     };
 
     getUserChats();
