@@ -8,15 +8,17 @@ import NavBar from "./components/NavBar";
 
 function App() {
   return (
-    <Container>
+    <>
       <NavBar />
-      <Routes>
-        <Route path="/" element={<Chat />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Container>
+      <Container className="text-secondary">
+        <Routes>
+          <Route path="/" element={<Chat />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Container>
+    </>
   );
 }
 

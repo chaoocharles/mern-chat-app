@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
 
     const token = createToken(user._id);
 
-    res.status(200).json({ name, email, token });
+    res.status(200).json({ _id: user._id, name, email, token });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
@@ -55,7 +55,7 @@ const loginUser = async (req, res) => {
 
     const token = createToken(user._id);
 
-    res.status(200).json({ name: user.name, email, token });
+    res.status(200).json({ _id: user._id, name: user.name, email, token });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);

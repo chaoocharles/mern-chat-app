@@ -7,21 +7,21 @@ const NavBar = () => {
   const { user, logoutUser } = useContext(AuthContext);
 
   return (
-    <Navbar>
+    <Navbar bg="light" className="mb-4">
       <Container>
         <h2>
-          <Link to="/" className="link-dark">
-            Chatt
+          <Link to="/" className="link-dark text-decoration-none">
+            ChattApp
           </Link>
         </h2>
         <Nav>
           <Stack direction="horizontal" gap={3}>
             {!user && (
               <>
-                <Link to="/login" className="link-dark">
+                <Link to="/login" className="link-dark text-decoration-none">
                   Login
                 </Link>
-                <Link to="/register" className="link-dark">
+                <Link to="/register" className="link-dark text-decoration-none">
                   Register
                 </Link>
               </>
@@ -30,7 +30,7 @@ const NavBar = () => {
               <Link
                 onClick={() => logoutUser()}
                 to="/login"
-                className="link-dark"
+                className="link-dark text-decoration-none"
               >
                 Logout
               </Link>
