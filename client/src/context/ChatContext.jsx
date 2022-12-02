@@ -14,7 +14,7 @@ export const ChatContextProvider = ({ children, user }) => {
   useEffect(() => {
     const getUserChats = async () => {
       setIsUserChatsLoading(true);
-      setLoginError(null);
+      setUserChatsError(null);
 
       if (user?._id) {
         const userId = user._id;
