@@ -5,10 +5,14 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Container from "react-bootstrap/Container";
 import NavBar from "./components/NavBar";
+import { ChatContextProvider } from "./context/ChatContext";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { user } = useContext(AuthContext);
   return (
-    <>
+    <ChatContextProvider user={user}>
       <NavBar />
       <Container className="text-secondary">
         <Routes>
@@ -18,7 +22,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Container>
-    </>
+    </ChatContextProvider>
   );
 }
 

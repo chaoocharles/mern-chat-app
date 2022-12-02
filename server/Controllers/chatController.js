@@ -16,7 +16,7 @@ const createChat = async (req, res) => {
 };
 
 const userChats = async (req, res) => {
-  const { userId } = req.params.userId;
+  const userId = req.params.userId;
 
   try {
     const chats = await chatModel.find({
@@ -30,8 +30,8 @@ const userChats = async (req, res) => {
 };
 
 const findChat = async (req, res) => {
-  const { firstId } = req.params.firstId;
-  const { secondId } = req.params.secondId;
+  const firstId = req.params.firstId;
+  const secondId = req.params.secondId;
 
   try {
     const chat = await chatModel.findOne({

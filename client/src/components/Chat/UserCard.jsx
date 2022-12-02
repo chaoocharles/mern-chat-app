@@ -7,6 +7,7 @@ const UserCard = () => {
       direction="horizontal"
       gap={3}
       className="align-items-start border p-2 rounded"
+      role="button"
     >
       <div>
         <img src={personCircle} alt="person-circle" height="45px" />
