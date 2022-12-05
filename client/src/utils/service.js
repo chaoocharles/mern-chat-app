@@ -1,8 +1,6 @@
 export const baseUrl = "http://localhost:5000/api";
 
 export const postRequest = async (url, body) => {
-  console.log("body", body);
-
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -10,7 +8,6 @@ export const postRequest = async (url, body) => {
     },
     body,
   });
-  console.log("response", response);
 
   const data = await response.json();
 
@@ -19,6 +16,7 @@ export const postRequest = async (url, body) => {
 
     if (data?.message) {
       message = data.message;
+      console.log("Error:", message);
     } else {
       message = data;
     }
@@ -30,7 +28,6 @@ export const postRequest = async (url, body) => {
 };
 
 export const getRequest = async (url) => {
-  console.log(url);
   const response = await fetch(url);
 
   const data = await response.json();
@@ -40,6 +37,7 @@ export const getRequest = async (url) => {
 
     if (data?.message) {
       message = data.message;
+      console.log("Error:", message);
     }
 
     return { error: true, status: response.status, message };
