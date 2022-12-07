@@ -3,3 +3,33 @@
 body {
   font-family: "Nunito", sans-serif;
 }
+
+/* Chat Header */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background: rgba(209, 209, 209, 0.2);
+  color: rgb(12, 12, 12);
+}
+
+/* Messages */
+.message {
+  color: black;
+  background: #efefef;
+  padding: 0.75rem;
+  border-radius: 5px;
+  max-width: 50%;
+}
+
+.message.self {
+  color: #4870df;
+  background: rgba(72, 112, 223, 0.2);
+}
+
+.message-footer {
+  font-size: 12px;
+  align-self: flex-end;
+  font-weight: 400;
+}
