@@ -36,11 +36,11 @@ const ChatBox = () => {
   if (!recipientUser) return null;
 
   return (
-    <Stack gap={4}>
+    <Stack gap={4} className="chat-box">
       <div className="chat-header">
         <strong>{recipientUser?.name}</strong>
       </div>
-      <Stack gap={3}>
+      <Stack gap={3} className="messages">
         {messages &&
           messages?.map((message, index) => (
             <Stack
@@ -58,6 +58,7 @@ const ChatBox = () => {
             </Stack>
           ))}
       </Stack>
+      <Stack className="chat-input flex-grow-0">Chat Input</Stack>
     </Stack>
   );
 };

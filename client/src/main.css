@@ -2,6 +2,14 @@
 
 body {
   font-family: "Nunito", sans-serif;
+  overflow: hidden;
+}
+
+/* Chat Box */
+.chat-box {
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  position: relative;
 }
 
 /* Chat Header */
@@ -15,6 +23,10 @@ body {
 }
 
 /* Messages */
+.messages {
+  max-height: calc(100vh - (15rem));
+  overflow-y: auto;
+}
 .message {
   color: black;
   background: #efefef;
@@ -24,7 +36,7 @@ body {
 }
 
 .message.self {
-  color: #4870df;
+  color: rgba(72, 112, 223, 1);
   background: rgba(72, 112, 223, 0.2);
 }
 
@@ -32,4 +44,13 @@ body {
   font-size: 12px;
   align-self: flex-end;
   font-weight: 400;
+}
+
+/* Chat Input  */
+.chat-input {
+  position: absolute;
+  bottom: 0;
+  background-color: blue;
+  height: 50px;
+  width: 100%;
 }
