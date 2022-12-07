@@ -24,8 +24,9 @@ body {
 
 /* Messages */
 .messages {
-  max-height: calc(100vh - (15rem));
+  max-height: calc(100vh - 15rem);
   overflow-y: auto;
+  font-weight: 700;
 }
 .message {
   color: black;
@@ -50,7 +51,13 @@ body {
 .chat-input {
   position: absolute;
   bottom: 0;
-  background-color: blue;
-  height: 50px;
   width: 100%;
+}
+.send-btn {
+  border: none;
+  background: rgba(72, 112, 223, 1);
+  color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 }
