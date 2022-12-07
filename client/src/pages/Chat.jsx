@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Container, Row, Stack } from "react-bootstrap";
+import ChatBox from "../components/Chat/ChatBox";
 import UserCard from "../components/Chat/UserCard";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
@@ -7,7 +8,7 @@ import { ChatContext } from "../context/ChatContext";
 const Chat = () => {
   const { user } = useContext(AuthContext);
 
-  const { userChats, isUserChatsLoading, userChatsError } =
+  const { userChats, isUserChatsLoading, updateCurrentChat } =
     useContext(ChatContext);
 
   return (
@@ -18,13 +19,18 @@ const Chat = () => {
           className="flex-grow-0 border-end pe-3"
           gap={3}
         >
-          {isUserChatsLoading && <>Fetching Chats..</>}
-          {!isUserChatsLoading && !userChats && <p>No Chats..</p>}
+          {isUserChatsLoading && <p>Fetching Chats..</p>}
+          {(!isUserChatsLoading && !userChats) ||
+            (!userChats?.length === 0 && <p>No Chats..</p>)}
           {userChats?.map((chat, index) => {
-            return <UserCard key={index} chat={chat} user={user} />;
+            return (
+              <div key={index} onClick={() => updateCurrentChat(chat)}>
+                <UserCard chat={chat} user={user} />
+              </div>
+            );
           })}
         </Stack>
-        <div>ChatBox</div>
+        <ChatBox />
       </Stack>
     </Container>
   );

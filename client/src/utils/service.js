@@ -16,7 +16,6 @@ export const postRequest = async (url, body) => {
 
     if (data?.message) {
       message = data.message;
-      console.log("Error:", message);
     } else {
       message = data;
     }
@@ -37,7 +36,6 @@ export const getRequest = async (url) => {
 
     if (data?.message) {
       message = data.message;
-      console.log("Error:", message);
     }
 
     return { error: true, status: response.status, message };

@@ -1,19 +1,9 @@
-import { useEffect } from "react";
-import { useContext } from "react";
 import { Stack } from "react-bootstrap";
 import personCircle from "../../assets/person-circle.svg";
-import { ChatContext } from "../../context/ChatContext";
+import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
 
 const UserCard = ({ chat, user }) => {
-  const { recipientUser, getRecipientUser } = useContext(ChatContext);
-
-  const recipientId = chat?.members.find((id) => id !== user?._id);
-
-  useEffect(() => {
-    getRecipientUser(recipientId);
-  }, [recipientId]);
-
-  console.log("recipient", recipientUser);
+  const { recipientUser } = useFetchRecipientUser(chat, user);
 
   return (
     <Stack
