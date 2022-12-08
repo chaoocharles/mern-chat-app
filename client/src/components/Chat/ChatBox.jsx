@@ -15,6 +15,7 @@ const ChatBox = () => {
 
   const [messages, setMessages] = useState(null);
   const [messagesError, setMessagesError] = useState(null);
+  const [textMessage, setTextMessage] = useState("");
 
   useEffect(() => {
     const getMessages = async () => {
@@ -34,7 +35,12 @@ const ChatBox = () => {
   console.log("messages", messages);
   console.log("messagesError", messagesError);
 
-  if (!recipientUser) return null;
+  if (!recipientUser)
+    return (
+      <p style={{ textAlign: "center", width: "100%" }}>
+        No conversation selected yet..
+      </p>
+    );
 
   return (
     <Stack gap={4} className="chat-box">
@@ -60,7 +66,14 @@ const ChatBox = () => {
           ))}
       </Stack>
       <Stack direction="horizontal" className="chat-input flex-grow-0" gap={3}>
-        <InputEmoji />
+        <InputEmoji
+          value={textMessage}
+          onChange={setTextMessage}
+          cleanOnEnter
+          theme="dark"
+          fontFamily="nunito"
+          borderColor="rgba(72, 112, 223, 0.2)"
+        />
         <button className="send-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"

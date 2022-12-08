@@ -9,7 +9,7 @@ const UserCard = ({ chat, user }) => {
     <Stack
       direction="horizontal"
       gap={3}
-      className="align-items-start border p-2 rounded"
+      className=" user-card align-items-start p-2 rounded"
       role="button"
     >
       <div>

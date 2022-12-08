@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Chat from "./pages/Chat";
 import Login from "./pages/Login";
@@ -16,9 +16,9 @@ function App() {
       <NavBar />
       <Container className="text-secondary">
         <Routes>
-          <Route path="/" element={<Chat />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={user ? <Chat /> : <Login />} />
+          <Route path="/register" element={user ? <Chat /> : <Register />} />
+          <Route path="/login" element={user ? <Chat /> : <Login />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Container>
