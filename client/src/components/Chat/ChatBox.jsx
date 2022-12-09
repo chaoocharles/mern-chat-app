@@ -10,30 +10,9 @@ import InputEmoji from "react-input-emoji";
 
 const ChatBox = () => {
   const { user } = useContext(AuthContext);
-  const { currentChat } = useContext(ChatContext);
+  const { currentChat, messages, messagesError } = useContext(ChatContext);
   const { recipientUser } = useFetchRecipientUser(currentChat, user);
-
-  const [messages, setMessages] = useState(null);
-  const [messagesError, setMessagesError] = useState(null);
   const [textMessage, setTextMessage] = useState("");
-
-  useEffect(() => {
-    const getMessages = async () => {
-      const response = await getRequest(
-        `${baseUrl}/messages/${currentChat?._id}`
-      );
-
-      if (response.error) {
-        return setMessagesError(error);
-      }
-
-      setMessages(response);
-    };
-    getMessages();
-  }, [currentChat]);
-
-  console.log("messages", messages);
-  console.log("messagesError", messagesError);
 
   if (!recipientUser)
     return (

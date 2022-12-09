@@ -6,31 +6,30 @@ const io = new Server({
   },
 });
 
-let activeUsers = [];
+let onlineUsers = [];
 
 io.on("connection", (socket) => {
   // add user
 
-  socket.on("add-new-user", (userId) => {
-    if (!activeUsers.some((user) => user.userId === userId)) {
-      activeUsers.push({
+  socket.on("addNewUser", (userId) => {
+    !onlineUsers.some((user) => user.userId === userId) &&
+      onlineUsers.push({
         userId,
         socketId: socket.id,
       });
-    }
 
-    console.log("Connected Users:", activeUsers);
+    console.log("Connected Users:", onlineUsers);
 
     // send active users
-    io.emit("get-users", activeUsers);
+    io.emit("getUsers", onlineUsers);
   });
 
   socket.on("disconnect", () => {
-    activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
-    console.log("User Disconnected:", activeUsers);
+    onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
+    console.log("User Disconnected:", onlineUsers);
 
     // send active users
-    io.emit("get-users", activeUsers);
+    io.emit("getUsers", onlineUsers);
   });
 });
 
