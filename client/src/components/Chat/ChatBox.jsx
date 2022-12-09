@@ -4,15 +4,28 @@ import { Stack } from "react-bootstrap";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
-import { baseUrl, getRequest } from "../../utils/service";
 import moment from "moment";
 import InputEmoji from "react-input-emoji";
+import { io } from "socket.io-client";
 
 const ChatBox = () => {
   const { user } = useContext(AuthContext);
   const { currentChat, messages, messagesError } = useContext(ChatContext);
   const { recipientUser } = useFetchRecipientUser(currentChat, user);
   const [textMessage, setTextMessage] = useState("");
+  const [socket, setSocket] = useState(null);
+
+  console.log("current socket", socket);
+
+  useEffect(() => {
+    const newSocket = io("http://127.0.0.1:5173/");
+    setSocket(newSocket);
+
+    return () => {
+      console.log("Disconnecting", newSocket);
+      newSocket.disconnect();
+    };
+  }, [user]);
 
   if (!recipientUser)
     return (
