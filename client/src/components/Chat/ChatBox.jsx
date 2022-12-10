@@ -52,7 +52,9 @@ const ChatBox = () => {
         />
         <button
           className="send-btn"
-          onClick={() => sendTextMessage(textMessage, user, currentChat._id)}
+          onClick={() =>
+            sendTextMessage(textMessage, user, currentChat._id, setTextMessage)
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
