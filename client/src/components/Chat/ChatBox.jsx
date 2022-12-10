@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useContext } from "react";
 import { Stack } from "react-bootstrap";
 import { AuthContext } from "../../context/AuthContext";
@@ -6,12 +6,18 @@ import { ChatContext } from "../../context/ChatContext";
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
 import moment from "moment";
 import InputEmoji from "react-input-emoji";
+import { useEffect } from "react";
 
 const ChatBox = () => {
   const { user } = useContext(AuthContext);
   const { currentChat, messages, sendTextMessage } = useContext(ChatContext);
   const { recipientUser } = useFetchRecipientUser(currentChat, user);
   const [textMessage, setTextMessage] = useState("");
+  const scroll = useRef();
+
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   if (!recipientUser)
     return (
@@ -35,6 +41,7 @@ const ChatBox = () => {
                   : "message align-self-start flex-grow-0"
               }`}
               key={index}
+              ref={scroll}
             >
               <span>{message.text}</span>
               <span className="message-footer">
