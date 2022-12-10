@@ -14,6 +14,7 @@ const NavBar = () => {
             ChattApp
           </Link>
         </h2>
+        {user && <span className="text-warning">Logged in as {user.name}</span>}
         <Nav>
           <Stack direction="horizontal" gap={3}>
             {!user && (
@@ -29,6 +30,7 @@ const NavBar = () => {
                 </Link>
               </>
             )}
+
             {user && (
               <Link
                 onClick={() => logoutUser()}

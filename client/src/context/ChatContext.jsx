@@ -101,13 +101,18 @@ export const ChatContextProvider = ({ children, user }) => {
 
     socket.on("getMessage", (res) => {
       console.log("getMessage", res);
+      console.log("getMessage chat", currentChat);
+      console.log("getMessage2", currentChat?._id !== res.chatId);
+
+      if (currentChat?._id !== res.chatId) return;
+
       setMessages((prev) => [...prev, res]);
     });
 
     return () => {
       socket.off("getMessage");
     };
-  }, [socket]);
+  }, [socket, currentChat]);
 
   const updateCurrentChat = useCallback(async (chat) => {
     setCurrentChat(chat);
@@ -150,6 +155,7 @@ export const ChatContextProvider = ({ children, user }) => {
         onlineUsers,
         socket,
         sendTextMessage,
+        onlineUsers,
       }}
     >
       {children}

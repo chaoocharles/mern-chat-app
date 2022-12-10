@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { Stack } from "react-bootstrap";
 import { AuthContext } from "../../context/AuthContext";
