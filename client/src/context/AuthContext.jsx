@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
     password: "",
   });
 
-  console.log("User:", user);
+  console.log("Userr:", user);
   console.log("registerError:", registerError);
   console.log("isRegisterLoading:", isRegisterLoading);
   console.log("loginError:", loginError);

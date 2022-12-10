@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 
 const io = new Server({
   cors: {
-    origin: "http://127.0.0.1:5173/",
+    origin: "http://127.0.0.1:5173",
   },
 });
 
@@ -22,6 +22,21 @@ io.on("connection", (socket) => {
 
     // send active users
     io.emit("getUsers", onlineUsers);
+  });
+
+  // add message
+  socket.on("sendMessage", (message) => {
+    console.log("onlineUsers", onlineUsers);
+    const user = onlineUsers.find(
+      (user) => user.userId === message.recipientId
+    );
+
+    console.log("incomming", message, user);
+
+    if (user) {
+      console.log("sending message");
+      io.to(user.socketId).emit("getMessage", message);
+    }
   });
 
   socket.on("disconnect", () => {
