@@ -8,11 +8,19 @@ import { ChatContext } from "../context/ChatContext";
 const Chat = () => {
   const { user } = useContext(AuthContext);
 
-  const { userChats, isUserChatsLoading, updateCurrentChat } =
+  const { users, userChats, isUserChatsLoading, updateCurrentChat } =
     useContext(ChatContext);
 
   return (
     <Container>
+      <div className="all-users">
+        {users &&
+          users.map((user, index) => (
+            <div className="single-user" key={index}>
+              {user.name}
+            </div>
+          ))}
+      </div>
       <Stack direction="horizontal" gap={4} className="align-items-start">
         <Stack
           style={{ height: "100vh" }}

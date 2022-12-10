@@ -5,6 +5,22 @@ body {
   /* overflow: hidden; */
 }
 
+/* All users */
+.all-users {
+  display: flex;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.single-user {
+  background: rgb(0, 213, 255);
+  color: white;
+  cursor: pointer;
+  padding: 5px 7px;
+  border-radius: 10px;
+  margin-right: 0.5rem;
+}
+
 /* User Card */
 .user-card {
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
