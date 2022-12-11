@@ -29,7 +29,7 @@ body {
 
 /* Chat Box */
 .chat-box {
-  max-height: calc(100vh - 6rem);
+  max-height: calc(100vh - 10rem);
   overflow-y: auto;
   position: relative;
 }

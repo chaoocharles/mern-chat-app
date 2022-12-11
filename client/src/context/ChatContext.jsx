@@ -157,6 +157,19 @@ export const ChatContextProvider = ({ children, user }) => {
     []
   );
 
+  const createChat = useCallback(async (senderId, receiverId) => {
+    const response = await postRequest(
+      `${baseUrl}/chats`,
+      JSON.stringify({ senderId, receiverId })
+    );
+
+    if (response.error) {
+      return console.log("Error creating chat:", response);
+    }
+
+    setUserChats((prev) => [...prev, response]);
+  }, []);
+
   return (
     <ChatContext.Provider
       value={{
@@ -172,6 +185,7 @@ export const ChatContextProvider = ({ children, user }) => {
         sendTextMessage,
         onlineUsers,
         users,
+        createChat,
       }}
     >
       {children}

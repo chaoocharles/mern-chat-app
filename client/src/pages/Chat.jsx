@@ -8,16 +8,37 @@ import { ChatContext } from "../context/ChatContext";
 const Chat = () => {
   const { user } = useContext(AuthContext);
 
-  const { users, userChats, isUserChatsLoading, updateCurrentChat } =
-    useContext(ChatContext);
+  const {
+    users,
+    userChats,
+    isUserChatsLoading,
+    updateCurrentChat,
+    createChat,
+  } = useContext(ChatContext);
+
+  const potentialChats = users?.filter((u) => {
+    let isChatCreated = false;
+
+    if (user._id === u._id) return false;
+
+    isChatCreated = userChats?.some(
+      (chat) => chat.members[0] === u._id || chat.members[1] === u._id
+    );
+
+    return !isChatCreated;
+  });
 
   return (
     <Container>
       <div className="all-users">
-        {users &&
-          users.map((user, index) => (
-            <div className="single-user" key={index}>
-              {user.name}
+        {potentialChats &&
+          potentialChats.map((receiver, index) => (
+            <div
+              className="single-user"
+              key={index}
+              onClick={() => createChat(user._id, receiver._id)}
+            >
+              {receiver.name}
             </div>
           ))}
       </div>
