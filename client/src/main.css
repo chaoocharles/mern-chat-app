@@ -31,7 +31,10 @@ body {
 .chat-box {
   max-height: calc(100vh - 10rem);
   overflow-y: auto;
-  position: relative;
+}
+
+.messages-box {
+  height: 85vh;
 }
 
 /* Chat Header */
@@ -71,8 +74,6 @@ body {
 
 /* Chat Input  */
 .chat-input {
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }
 .send-btn {

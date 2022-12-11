@@ -2,12 +2,18 @@ const chatModel = require("../Models/chatModel");
 
 const createChat = async (req, res) => {
   const { senderId, receiverId } = req.body;
-
-  const newChat = new chatModel({
-    members: [senderId, receiverId],
-  });
-
   try {
+    // check if a chat already exist
+    const chat = await chatModel.findOne({
+      members: { $all: [senderId, receiverId] },
+    });
+
+    if (chat) return res.status(200).json(chat);
+
+    const newChat = new chatModel({
+      members: [senderId, receiverId],
+    });
+
     const response = await newChat.save();
     res.status(200).json(response);
   } catch (error) {

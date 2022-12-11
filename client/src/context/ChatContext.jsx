@@ -16,7 +16,7 @@ export const ChatContextProvider = ({ children, user }) => {
   const [onlineUsers, setOnlineUsers] = useState(null);
   const [sendTextMessageError, setSendTextMessageError] = useState(null);
   const [newMessage, setNewMessage] = useState(null);
-  const [users, setUsers] = useState(null);
+  const [potentialChats, setPotentialChats] = useState(null);
 
   console.log("userChats", userChats);
   console.log("currentChat", currentChat);
@@ -57,11 +57,25 @@ export const ChatContextProvider = ({ children, user }) => {
         return console.log("Error fetching users:", response);
       }
 
-      setUsers(response);
+      if (userChats) {
+        const pChats = response?.filter((u) => {
+          let isChatCreated = false;
+
+          if (user._id === u._id) return false;
+
+          isChatCreated = userChats?.some(
+            (chat) => chat.members[0] === u._id || chat.members[1] === u._id
+          );
+
+          return !isChatCreated;
+        });
+
+        setPotentialChats(pChats);
+      }
     };
 
     getUsers();
-  }, []);
+  }, [userChats]);
 
   useEffect(() => {
     const getUserChats = async () => {
@@ -184,7 +198,7 @@ export const ChatContextProvider = ({ children, user }) => {
         socket,
         sendTextMessage,
         onlineUsers,
-        users,
+        potentialChats,
         createChat,
       }}
     >
