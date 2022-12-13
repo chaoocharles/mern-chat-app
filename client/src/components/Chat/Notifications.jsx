@@ -61,7 +61,7 @@ const Notifications = () => {
             modifiedNotifications.map((n, index) => (
               <div
                 key={index}
-                className="notification"
+                className={n.isRead ? `notification` : `notification not-read`}
                 onClick={() => {
                   markNotificationAsRead(n, userChats, user, notifications);
                   setIsOpen(false);
