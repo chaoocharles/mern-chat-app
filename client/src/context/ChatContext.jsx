@@ -198,18 +198,32 @@ export const ChatContextProvider = ({ children, user }) => {
     setNotifications(modifiedNotifications);
   }, []);
 
-  const markNotificationAsRead = useCallback((n, userChats, user) => {
-    const readChat = userChats.find((chat) => {
-      const chatMembers = [user._id, n.senderId];
-      const isDesiredChat = chat?.members.every((member) => {
-        return chatMembers.includes(member);
+  const markNotificationAsRead = useCallback(
+    (n, userChats, user, notifications) => {
+      // find chat to open
+      const readChat = userChats.find((chat) => {
+        const chatMembers = [user._id, n.senderId];
+        const isDesiredChat = chat?.members.every((member) => {
+          return chatMembers.includes(member);
+        });
+
+        return isDesiredChat;
       });
 
-      return isDesiredChat;
-    });
+      // mark notification as read
+      const modifiedNotifications = notifications.map((element) => {
+        if (n.senderId === element.senderId) {
+          return { ...n, isRead: true };
+        } else {
+          return element;
+        }
+      });
 
-    updateCurrentChat(readChat);
-  }, []);
+      updateCurrentChat(readChat);
+      setNotifications(modifiedNotifications);
+    },
+    []
+  );
 
   return (
     <ChatContext.Provider
