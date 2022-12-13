@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createContext } from "react";
 import { baseUrl, getRequest, postRequest } from "../utils/service";
 import { io } from "socket.io-client";
@@ -198,6 +198,19 @@ export const ChatContextProvider = ({ children, user }) => {
     setNotifications(modifiedNotifications);
   }, []);
 
+  const markNotificationAsRead = useCallback((n, userChats, user) => {
+    const readChat = userChats.find((chat) => {
+      const chatMembers = [user._id, n.senderId];
+      const isDesiredChat = chat?.members.every((member) => {
+        return chatMembers.includes(member);
+      });
+
+      return isDesiredChat;
+    });
+
+    updateCurrentChat(readChat);
+  }, []);
+
   return (
     <ChatContext.Provider
       value={{
@@ -217,6 +230,7 @@ export const ChatContextProvider = ({ children, user }) => {
         notifications,
         allUsers,
         markAllNotificationsAsRead,
+        markNotificationAsRead,
       }}
     >
       {children}

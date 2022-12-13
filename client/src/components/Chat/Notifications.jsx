@@ -1,10 +1,17 @@
 import { useContext, useState } from "react";
 import { ChatContext } from "../../context/ChatContext";
 import moment from "moment";
+import { AuthContext } from "../../context/AuthContext";
 
 const Notifications = () => {
-  const { notifications, allUsers, markAllNotificationsAsRead } =
-    useContext(ChatContext);
+  const { user } = useContext(AuthContext);
+  const {
+    notifications,
+    allUsers,
+    markAllNotificationsAsRead,
+    userChats,
+    markNotificationAsRead,
+  } = useContext(ChatContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const unreadNotifications = notifications.filter((n) => n.isRead === false);
@@ -47,9 +54,16 @@ const Notifications = () => {
               Mark all as read
             </div>
           </div>
+          {modifiedNotifications?.length === 0 ? (
+            <span>No notifications yet...</span>
+          ) : null}
           {modifiedNotifications &&
             modifiedNotifications.map((n, index) => (
-              <div key={index} className="notification">
+              <div
+                key={index}
+                className="notification"
+                onClick={() => markNotificationAsRead(n, userChats, user)}
+              >
                 <span>{`New message from ${n.senderName}`}</span>
                 <span className="notification-time">
                   {moment(n.date).fromNow()}
