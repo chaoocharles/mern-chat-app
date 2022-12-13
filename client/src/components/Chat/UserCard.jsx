@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Stack } from "react-bootstrap";
-import personCircle from "../../assets/person-circle.svg";
+import avarter from "../../assets/avarter.svg";
 import { ChatContext } from "../../context/ChatContext";
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
 
@@ -12,24 +12,18 @@ const UserCard = ({ chat, user }) => {
     (user) => user?.userId === recipientUser?._id
   );
 
-  console.log("isOnline", isOnline);
-
   return (
     <Stack
       direction="horizontal"
       gap={3}
-      className=" user-card align-items-start p-2 rounded"
+      className=" user-card align-items-center p-2 rounded"
       role="button"
     >
       <div>
-        <img src={personCircle} alt="person-circle" height="45px" />
+        <img src={avarter} alt="person-circle" height="35px" />
       </div>
-      <Stack>
-        <span>{recipientUser?.name}</span>
-        <span className={isOnline ? "text-success" : "text-danger"}>
-          {isOnline ? "Online" : "offline"}
-        </span>
-      </Stack>
+      <span>{recipientUser?.name}</span>
+      <span className={isOnline ? "user-online" : ""}></span>
     </Stack>
   );
 };

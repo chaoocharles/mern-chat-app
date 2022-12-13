@@ -9,7 +9,6 @@ body {
 .all-users {
   display: flex;
   margin-bottom: 1rem;
-  overflow-x: auto;
 }
 
 .single-user {
@@ -19,12 +18,27 @@ body {
   padding: 5px 7px;
   border-radius: 10px;
   margin-right: 0.5rem;
+  position: relative;
 }
 
 /* User Card */
 .user-card {
-  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-    0 15px 40px rgba(166, 173, 201, 0.2);
+  color: black;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  position: relative;
+}
+
+.user-online {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: rgb(1, 152, 1);
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  z-index: 2;
 }
 
 /* Chat Box */
@@ -83,4 +97,67 @@ body {
   height: 40px;
   width: 40px;
   border-radius: 50%;
+}
+
+/* Notification */
+.notifications {
+  position: relative;
+}
+
+.notifications-icon {
+  color: white;
+  cursor: pointer;
+  position: relative;
+  margin-right: 1rem;
+}
+
+.notifications-box {
+  max-height: 50vh;
+  width: 300px;
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 1rem;
+  background: #181d31;
+  color: white;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notifications-box h3 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.mark-as-read {
+  cursor: pointer;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.notification {
+  font-size: 14px;
+  margin: 1rem 0;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+.notification-count {
+  display: flex;
+  background: red;
+  height: 25px;
+  width: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -10px;
+  right: -15px;
 }

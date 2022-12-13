@@ -26,16 +26,17 @@ io.on("connection", (socket) => {
 
   // add message
   socket.on("sendMessage", (message) => {
-    console.log("onlineUsers", onlineUsers);
     const user = onlineUsers.find(
       (user) => user.userId === message.recipientId
     );
 
-    console.log("incomming", message, user);
-
     if (user) {
-      console.log("sending message");
+      console.log("sending message and notification");
       io.to(user.socketId).emit("getMessage", message);
+      io.to(user.socketId).emit("getNotification", {
+        senderId: message.senderId,
+        isRead: false,
+      });
     }
   });
 
