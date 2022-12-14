@@ -235,7 +235,6 @@ export const ChatContextProvider = ({ children, user }) => {
         currentChat,
         messages,
         messagesError,
-        onlineUsers,
         socket,
         sendTextMessage,
         onlineUsers,

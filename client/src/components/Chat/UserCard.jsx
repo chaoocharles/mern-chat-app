@@ -8,7 +8,7 @@ const UserCard = ({ chat, user }) => {
   const { recipientUser } = useFetchRecipientUser(chat, user);
   const { onlineUsers } = useContext(ChatContext);
 
-  const isOnline = onlineUsers.some(
+  const isOnline = onlineUsers?.some(
     (user) => user?.userId === recipientUser?._id
   );
 

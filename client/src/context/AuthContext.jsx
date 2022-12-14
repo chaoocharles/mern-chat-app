@@ -99,7 +99,6 @@ export const AuthContextProvider = ({ children }) => {
         user,
         registerUser,
         loginUser,
-        logoutUser,
         registerInfo,
         updateRegisterInfo,
         loginInfo,
