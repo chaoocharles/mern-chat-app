@@ -67,7 +67,7 @@ const Notifications = () => {
                   setIsOpen(false);
                 }}
               >
-                <span>{`New message from ${n.senderName}`}</span>
+                <span>{`${n.senderName} sent you a new message...`}</span>
                 <span className="notification-time">
                   {moment(n.date).fromNow()}
                 </span>
