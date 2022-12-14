@@ -55,7 +55,7 @@ const Notifications = () => {
             </div>
           </div>
           {modifiedNotifications?.length === 0 ? (
-            <span>No notifications yet...</span>
+            <span className="notification">No notifications yet...</span>
           ) : null}
           {modifiedNotifications &&
             modifiedNotifications.map((n, index) => (

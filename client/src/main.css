@@ -2,7 +2,7 @@
 
 body {
   font-family: "Nunito", sans-serif;
-  /* overflow: hidden; */
+  background: rgb(40, 40, 40);
 }
 
 /* All users */
@@ -23,9 +23,8 @@ body {
 
 /* User Card */
 .user-card {
-  color: black;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  color: white;
+  background: rgb(30, 30, 30);
   position: relative;
 }
 
@@ -45,6 +44,8 @@ body {
 .chat-box {
   max-height: calc(100vh - 10rem);
   overflow-y: auto;
+  background: rgb(20, 20, 20);
+  border-radius: 10px;
 }
 
 .messages-box {
@@ -57,27 +58,28 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0.75rem;
-  background: rgba(209, 209, 209, 0.2);
-  color: rgb(12, 12, 12);
+  color: white;
+  border-bottom: 2px solid rgb(40, 40, 40);
 }
 
 /* Messages */
 .messages {
   max-height: calc(100vh - 15rem);
   overflow-y: auto;
-  font-weight: 700;
+  padding: 0 2rem;
 }
+
 .message {
-  color: black;
-  background: rgba(209, 209, 209, 0.2);
+  color: white;
+  background: #282828;
   padding: 0.75rem;
   border-radius: 5px;
   max-width: 50%;
 }
 
 .message.self {
-  color: rgba(72, 112, 223, 1);
-  background: rgba(72, 112, 223, 0.2);
+  color: white;
+  background: #00bd9b;
 }
 
 .message-footer {
@@ -89,6 +91,8 @@ body {
 /* Chat Input  */
 .chat-input {
   width: 100%;
+  background: rgb(30, 30, 30);
+  padding: 1rem;
 }
 .send-btn {
   border: none;

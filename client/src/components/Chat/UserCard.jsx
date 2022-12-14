@@ -16,7 +16,7 @@ const UserCard = ({ chat, user }) => {
     <Stack
       direction="horizontal"
       gap={3}
-      className=" user-card align-items-center p-2 rounded"
+      className="user-card align-items-center p-2 rounded"
       role="button"
     >
       <div>
