@@ -69,7 +69,7 @@ const Notifications = () => {
               >
                 <span>{`${n.senderName} sent you a new message...`}</span>
                 <span className="notification-time">
-                  {moment(n.date).fromNow()}
+                  {moment(n.date).calendar()}
                 </span>
               </div>
             ))}

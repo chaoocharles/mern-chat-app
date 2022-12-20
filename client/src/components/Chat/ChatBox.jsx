@@ -45,7 +45,7 @@ const ChatBox = () => {
             >
               <span>{message.text}</span>
               <span className="message-footer">
-                {moment(message.createdAt).fromNow()}
+                {moment(message.createdAt).calendar()}
               </span>
             </Stack>
           ))}
