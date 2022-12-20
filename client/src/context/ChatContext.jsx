@@ -244,6 +244,7 @@ export const ChatContextProvider = ({ children, user }) => {
         allUsers,
         markAllNotificationsAsRead,
         markNotificationAsRead,
+        newMessage,
       }}
     >
       {children}
