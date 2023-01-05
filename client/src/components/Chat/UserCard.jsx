@@ -40,9 +40,14 @@ const UserCard = ({ chat, user }) => {
         gap={3}
         className="user-card align-items-center p-2 justify-content-between"
         role="button"
-        onClick={() =>
-          markThisUserNotificationsAsRead(thisUserNotifications, notifications)
-        }
+        onClick={() => {
+          if (thisUserNotifications?.length !== 0) {
+            markThisUserNotificationsAsRead(
+              thisUserNotifications,
+              notifications
+            );
+          }
+        }}
       >
         <div className="d-flex">
           <div className="me-2">
