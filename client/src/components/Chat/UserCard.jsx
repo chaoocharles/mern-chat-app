@@ -10,7 +10,8 @@ import moment from "moment";
 const UserCard = ({ chat, user }) => {
   const { recipientUser } = useFetchRecipientUser(chat, user);
   const { latestMessage } = useFecthLatestMessage(chat);
-  const { onlineUsers, notifications } = useContext(ChatContext);
+  const { onlineUsers, notifications, markThisUserNotificationsAsRead } =
+    useContext(ChatContext);
 
   const unreadNotifications = unreadNotificationsFunc(notifications);
 
@@ -39,6 +40,9 @@ const UserCard = ({ chat, user }) => {
         gap={3}
         className="user-card align-items-center p-2 justify-content-between"
         role="button"
+        onClick={() =>
+          markThisUserNotificationsAsRead(thisUserNotifications, notifications)
+        }
       >
         <div className="d-flex">
           <div className="me-2">
