@@ -30,7 +30,7 @@ body {
 }
 
 .user-card .text-content {
-  width: 150px;
+  width: 170px;
 }
 
 .user-card .name {
@@ -74,7 +74,7 @@ body {
   justify-content: center;
   padding: 0.75rem;
   color: white;
-  border-bottom: 2px solid rgb(40, 40, 40);
+  background: rgb(30, 30, 30);
 }
 
 /* Messages */
@@ -184,7 +184,7 @@ body {
 
 .notification-count {
   display: flex;
-  background: red;
+  background: #00bd9b;
   height: 25px;
   width: 25px;
   font-size: 14px;

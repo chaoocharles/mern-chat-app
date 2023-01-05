@@ -4,7 +4,6 @@ import avarter from "../../assets/avarter.svg";
 import { ChatContext } from "../../context/ChatContext";
 import { useFecthLatestMessage } from "../../hooks/useFetchLatestMessage";
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
-import TextTruncate from "react-text-truncate";
 import moment from "moment";
 
 const UserCard = ({ chat, user }) => {
@@ -18,28 +17,35 @@ const UserCard = ({ chat, user }) => {
 
   console.log("latestMessage", latestMessage);
 
+  const truncateText = (text) => {
+    let shortText = text.substring(0, 20);
+
+    if (text.length > 20) {
+      shortText = shortText + "...";
+    }
+
+    return shortText;
+  };
+
   return (
     <>
       <Stack
         direction="horizontal"
         gap={3}
-        className="user-card align-items-center p-2 justify-content-evenly"
+        className="user-card align-items-center p-2 justify-content-between"
         role="button"
       >
-        <div>
-          <img src={avarter} alt="person-circle" height="35px" />
-        </div>
-        <div className="text-content">
-          <div className="name">{recipientUser?.name}</div>
-          <div className="text">
-            {latestMessage?.text && (
-              <TextTruncate
-                line={1}
-                element="span"
-                truncateText="…"
-                text={latestMessage?.text}
-              />
-            )}
+        <div className="d-flex">
+          <div className="me-2">
+            <img src={avarter} alt="person-circle" height="35px" />
+          </div>
+          <div className="text-content">
+            <div className="name">{recipientUser?.name}</div>
+            <div className="text">
+              {latestMessage?.text && (
+                <span>{truncateText(latestMessage?.text)}</span>
+              )}
+            </div>
           </div>
         </div>
         <div className="d-flex flex-column align-items-end align-self-end">

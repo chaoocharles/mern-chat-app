@@ -10,7 +10,8 @@ import { useEffect } from "react";
 
 const ChatBox = () => {
   const { user } = useContext(AuthContext);
-  const { currentChat, messages, sendTextMessage } = useContext(ChatContext);
+  const { currentChat, messages, sendTextMessage, isMessagesLoading } =
+    useContext(ChatContext);
   const { recipientUser } = useFetchRecipientUser(currentChat, user);
   const [textMessage, setTextMessage] = useState("");
   const scroll = useRef();
@@ -24,6 +25,11 @@ const ChatBox = () => {
       <p style={{ textAlign: "center", width: "100%" }}>
         No conversation selected yet..
       </p>
+    );
+
+  if (isMessagesLoading)
+    return (
+      <p style={{ textAlign: "center", width: "100%" }}>Loading chat...</p>
     );
 
   return (

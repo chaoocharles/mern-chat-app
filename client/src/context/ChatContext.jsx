@@ -12,6 +12,7 @@ export const ChatContextProvider = ({ children, user }) => {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState(null);
   const [messagesError, setMessagesError] = useState(null);
+  const [isMessagesLoading, setIsMessagesLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState(null);
   const [sendTextMessageError, setSendTextMessageError] = useState(null);
@@ -83,9 +84,13 @@ export const ChatContextProvider = ({ children, user }) => {
 
   useEffect(() => {
     const getMessages = async () => {
+      setIsMessagesLoading(true);
+
       const response = await getRequest(
         `${baseUrl}/messages/${currentChat?._id}`
       );
+
+      setIsMessagesLoading(false);
 
       if (response.error) {
         return setMessagesError(error);
