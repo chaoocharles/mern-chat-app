@@ -4,18 +4,23 @@ import avarter from "../../assets/avarter.svg";
 import { ChatContext } from "../../context/ChatContext";
 import { useFecthLatestMessage } from "../../hooks/useFetchLatestMessage";
 import { useFetchRecipientUser } from "../../hooks/useFetchRecipient";
+import { unreadNotificationsFunc } from "../../utils/unreadNotifications";
 import moment from "moment";
 
 const UserCard = ({ chat, user }) => {
   const { recipientUser } = useFetchRecipientUser(chat, user);
   const { latestMessage } = useFecthLatestMessage(chat);
-  const { onlineUsers } = useContext(ChatContext);
+  const { onlineUsers, notifications } = useContext(ChatContext);
+
+  const unreadNotifications = unreadNotificationsFunc(notifications);
 
   const isOnline = onlineUsers?.some(
     (user) => user?.userId === recipientUser?._id
   );
 
-  console.log("latestMessage", latestMessage);
+  const thisUserNotifications = unreadNotifications?.filter(
+    (n) => n.senderId == recipientUser._id
+  );
 
   const truncateText = (text) => {
     let shortText = text.substring(0, 20);
@@ -48,11 +53,19 @@ const UserCard = ({ chat, user }) => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column align-items-end align-self-end">
+        <div className="d-flex flex-column align-items-end">
           <div className="date">
             {moment(latestMessage?.createdAt).calendar()}
           </div>
-          <div>2</div>
+          <div
+            className={
+              thisUserNotifications?.length > 0 ? "this-user-notifications" : ""
+            }
+          >
+            {thisUserNotifications?.length > 0
+              ? thisUserNotifications?.length
+              : ""}
+          </div>
           <span className={isOnline ? "user-online" : ""}></span>
         </div>
       </Stack>
