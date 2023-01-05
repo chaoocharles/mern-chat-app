@@ -73,6 +73,10 @@ export const ChatContextProvider = ({ children, user }) => {
     });
 
     socket.on("getNotification", (res) => {
+      const isChatOpen = currentChat?.members.some((Id) => Id === res.senderId);
+
+      if (isChatOpen) return;
+
       setNotifications((prev) => [res, ...prev]);
     });
 
@@ -248,8 +252,6 @@ export const ChatContextProvider = ({ children, user }) => {
         return notification;
       });
 
-      console.log("thisUserNotifications", thisUserNotifications);
-      console.log("modifiedNotifications", modifiedNotifications);
       setNotifications(modifiedNotifications);
     },
     []
