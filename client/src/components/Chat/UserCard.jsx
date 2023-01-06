@@ -20,7 +20,7 @@ const UserCard = ({ chat, user }) => {
   );
 
   const thisUserNotifications = unreadNotifications?.filter(
-    (n) => n.senderId == recipientUser._id
+    (n) => n.senderId == recipientUser?._id
   );
 
   const truncateText = (text) => {

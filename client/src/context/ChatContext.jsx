@@ -156,7 +156,7 @@ export const ChatContextProvider = ({ children, user }) => {
     };
 
     getUserChats();
-  }, [user]);
+  }, [user, notifications]);
 
   const updateCurrentChat = useCallback(async (chat) => {
     setCurrentChat(chat);
