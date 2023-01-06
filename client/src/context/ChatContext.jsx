@@ -75,9 +75,11 @@ export const ChatContextProvider = ({ children, user }) => {
     socket.on("getNotification", (res) => {
       const isChatOpen = currentChat?.members.some((Id) => Id === res.senderId);
 
-      if (isChatOpen) return;
-
-      setNotifications((prev) => [res, ...prev]);
+      if (isChatOpen) {
+        setNotifications((prev) => [{ ...res, isRead: true }, ...prev]);
+      } else {
+        setNotifications((prev) => [res, ...prev]);
+      }
     });
 
     return () => {
